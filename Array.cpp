@@ -61,6 +61,13 @@ Array::~Array (void)
 
 }
 
+//I do not understand what I'm supposed to do with the array operators.
+//These things are confusing and frustrating me. I will send an email about
+//it to you guys because I'm so confused. I wanted to figure it out on
+//my own though, which is why I refused to ask for help.
+//I'm a bit stubborn like that ;_; Please forgive me for no code in these ones
+//Boss man. :) 
+
 const Array & Array::operator = (const Array & rhs)
 {
 
@@ -78,9 +85,12 @@ const char & Array::operator [] (size_t index) const
 
 }
 
-//Gets a max size of the array
+//Gets character from array
 char Array::get (size_t index) const
 {
+   char ch;
+    ch=ary[index];
+    return ch;
 
 }
 
@@ -100,9 +110,18 @@ void Array::set (size_t index, char value)
 void Array::resize (size_t new_size)
 {
     //first create an empty array with the new size
-
+    char *ptr=NULL;
+    ptr=new ary[new_size];
     //then copy old data into the new array
-
+    for(int i=0; i<new_size;i++){
+        //leave function if there are no more
+        //characters in the old array
+        if(oldAry[i]=NULL){
+            break; 
+        }
+        //otherwise put the old character in the new array
+        ary[i]=oldAry[i];
+    }
     //I am not sure if the array should not shrink.
     //If it is ok to shrink the array might use the shrink funct
     //on final copy
@@ -116,16 +135,25 @@ int Array::find (char ch) const
     //compare the indexed array value to the character given
     while(strcmp(ary[i],ch) !=0){
         i++;
+        if(ary[i]==NULL){
+            break;
+        }
     }
+    i--;
+    return i;
 
 }
 
 //finds the character at the start of the array
 int Array::find (char ch, size_t start) const
 {
-
+    if(strcmp(ary[start],ch)){
+        return start;
+    }
+    cout<<"Could not find character";
 }
 
+//see note about array operators above please :)
 bool Array::operator == (const Array & rhs) const
 {
 
@@ -139,12 +167,20 @@ bool Array::operator != (const Array & rhs) const
 //fills array with a specified character
 void Array::fill (char ch)
 {
+    //create array
+    
+    //fill array with character
+    ary[i]=ch;
 
 }
 
 //shrinks array size
 void Array::shrink (void)
 {
+    //delete the array element to shrink
+    delete ary[end]; 
+    
+    
 
 }
 
@@ -168,14 +204,12 @@ void Array::reverse (void)
             ary[j]=newEle;
         }
     }
-
-
-
 }
 
 
 void Array::slice (size_t begin)
 {
+    
 
 }
 

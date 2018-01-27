@@ -206,11 +206,14 @@ void Array::reverse (void)
     }
 }
 
-
+//returns shallow copy of array
 void Array::slice (size_t begin)
 {
+    //copy original array
+    char *NAry= OrgAry[begin];
+    //slice new array
     
-
+    
 }
 
 //splits array down the middle

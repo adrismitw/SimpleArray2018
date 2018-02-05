@@ -94,8 +94,9 @@ void Array::resize (size_t new_size)
 			diff_size = new_size - max_size_;
 			cur_size_ = max_size_;
 			while (diff_size != 0) {
-				
+				 new this->operator[](cur_size);
 				cur_size_++;
+				diff_size--;
 			}
 	//check if new size is smaller than previous
 	}
@@ -107,6 +108,7 @@ void Array::resize (size_t new_size)
 		while (diff_size2 != 0) {
 			delete this->operator[](cur_size_);
 			cur_size_--;
+			diff_size2--;
 		}
 	}//if new size is the samee
 	else {
@@ -169,24 +171,24 @@ void Array::fill (char ch)
 //shrinks array size
 void Array::shrink (void)
 {
-
-
+	delete this->operator[](max_size_);
 }
 
 //reverses the order of the array
 void Array::reverse (void)
 {
-    int i, j;
+    size_t i, j;
+	char newEle;
 
     //begin reversing array.
     //My logic behind coding this is a basic swap algorithm
     //You take the start and swap it with the end then keep going
     //inward until you reach the middle of the array
     for(i=0; i<max_size_; i++){
-        for(j=length; j==i; j++){
-            newEle=ary[i];
-            ary[i]=ary[j];
-            ary[j]=newEle;
+        for(j=max_size_; j > i; j--){
+            newEle=this->operator[](i);
+			this->operator[](i) = this->operator[](j);
+			this->operator[](j) =newEle;
         }
     }
 

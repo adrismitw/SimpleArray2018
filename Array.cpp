@@ -23,7 +23,7 @@ Array::Array (size_t length)
 //This function fills up an array of a particular size
 Array::Array (size_t length, char fill)
 {
-    this.operator[](length)=fill;
+    this->operator[](length)=fill;
 
 }
 
@@ -41,6 +41,8 @@ Array::~Array (void)
 
 const Array & Array::operator = (const Array & rhs)
 {
+	if(this->operator[] == rhs)
+		return this;
 
 }
 
@@ -83,19 +85,29 @@ void Array::set (size_t index, char value)
 //resizes the array
 void Array::resize (size_t new_size)
 {
-	char * ptr;
+	char *ptr;
+	char temp;
 	//check if new size is larger than previous size
 	if (new_size > max_size_) {
 		//add the amount of new elements
-		while (new_size != max_size_) {
-			
-		}
-
-	
+			size_t diff_size;
+			diff_size = new_size - max_size_;
+			cur_size_ = max_size_;
+			while (diff_size != 0) {
+				
+				cur_size_++;
+			}
 	//check if new size is smaller than previous
 	}
 	else if (new_size < max_size_) {
-	
+		//delete characters at the end of the array until reached new max size
+		size_t diff_size2;
+		diff_size2 = max_size_ - new_size;
+		cur_size_ = max_size_;
+		while (diff_size2 != 0) {
+			delete this->operator[](cur_size_);
+			cur_size_--;
+		}
 	}//if new size is the samee
 	else {
 		//do nothing to array
@@ -108,7 +120,7 @@ int Array::find (char ch) const
 {
     int i=0;
     //compare the indexed array value to the character given
-    while(strcmp(this.operator[](i), ch) !=0){
+    while(strcmp(this->operator[](i), ch) !=0){
         i++;
     }
     return i;
@@ -130,7 +142,7 @@ int Array::find (char ch, size_t start) const
 
 bool Array::operator == (const Array & rhs) const
 {
-    if(this & rhs)
+    if(this->operator[] & rhs)
         return 1;
     else
         return 0;
@@ -139,7 +151,7 @@ bool Array::operator == (const Array & rhs) const
 
 bool Array::operator != (const Array & rhs) const
 {
-    if(this!= rhs){
+    if(this->operator[]!= rhs){
         return 1;
     }else{
         return 0;
@@ -150,7 +162,7 @@ bool Array::operator != (const Array & rhs) const
 //fills array with a specified character
 void Array::fill (char ch)
 {
-	this(cur_size_) = ch;
+	this->operator[](cur_size_) = ch;
 
 }
 
@@ -185,7 +197,8 @@ void Array::reverse (void)
 
 void Array::slice (size_t begin)
 {
-
+	size_t *prt;
+	ptr = begin;
 }
 
 //makes shallow copy of array
